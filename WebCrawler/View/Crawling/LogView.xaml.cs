@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WebCrawler
+namespace WebCrawler.View.Crawling
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LogView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LogView : UserControl
     {
-        public MainWindow()
+        public LogView()
         {
             InitializeComponent();
-        }
-
-        private void CrawlingTabView_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

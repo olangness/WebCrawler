@@ -55,6 +55,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\Crawling\CrawlingTabView.xaml.cs">
+      <DependentUpon>CrawlingTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Crawling\LogView.xaml.cs">
+      <DependentUpon>LogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Crawling\TopicKeywordView.xaml.cs">
+      <DependentUpon>TopicKeywordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Crawling\WebsiteCrawlerView.xaml.cs">
+      <DependentUpon>WebsiteCrawlerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TopicsTree\TopicTreeTabView.xaml.cs">
+      <DependentUpon>TopicTreeTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WebsiteTree\WebsiteTreeBrowserView.xaml.cs">
+      <DependentUpon>WebsiteTreeBrowserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WebsiteTree\WebsiteTreeTabView.xaml.cs">
+      <DependentUpon>WebsiteTreeTabView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,6 +88,34 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Crawling\CrawlingTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Crawling\LogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Crawling\TopicKeywordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Crawling\WebsiteCrawlerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TopicsTree\TopicTreeTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WebsiteTree\WebsiteTreeBrowserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WebsiteTree\WebsiteTreeTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -97,7 +146,6 @@
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="ViewModel\" />
-    <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

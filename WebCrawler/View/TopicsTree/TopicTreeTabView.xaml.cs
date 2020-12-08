@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WebCrawler
+namespace WebCrawler.View.TopicsTree
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TopicTreeTabView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TopicTreeTabView : UserControl
     {
-        public MainWindow()
+        public TopicTreeTabView()
         {
             InitializeComponent();
-        }
-
-        private void CrawlingTabView_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

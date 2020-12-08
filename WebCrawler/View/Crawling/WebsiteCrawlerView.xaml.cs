@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WebCrawler
+namespace WebCrawler.View.Crawling
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for WebsiteCrawlerView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class WebsiteCrawlerView : UserControl
     {
-        public MainWindow()
+        public WebsiteCrawlerView()
         {
             InitializeComponent();
-        }
-
-        private void CrawlingTabView_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
