@@ -8,5 +8,6 @@ namespace WebCrawler.ViewModel.Crawling
 {
     class TopicKeywordViewModel
     {
+        public List<string> Topics { get; set; }
     }
 }

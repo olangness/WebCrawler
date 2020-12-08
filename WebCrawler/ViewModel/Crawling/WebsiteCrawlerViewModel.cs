@@ -8,5 +8,6 @@ namespace WebCrawler.ViewModel.Crawling
 {
     class WebsiteCrawlerViewModel
     {
+        public string StartingURL { get; set; }
     }
 }

@@ -8,5 +8,8 @@ namespace WebCrawler.ViewModel.WebsiteTree
 {
     class WebsiteTreeTabViewModel
     {
+        public string WebsiteURL { get; set; }
+
+        public WebsiteTreeBrowserViewModel WebsiteTreeBrowserViewModel { get; set; }
     }
 }

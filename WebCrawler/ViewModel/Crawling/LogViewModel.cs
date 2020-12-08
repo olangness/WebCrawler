@@ -8,5 +8,6 @@ namespace WebCrawler.ViewModel.Crawling
 {
     class LogViewModel
     {
+        public string Log { get; set; }
     }
 }
