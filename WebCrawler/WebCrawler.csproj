@@ -55,6 +55,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Crawling\CrawlingTabViewModel.cs" />
+    <Compile Include="ViewModel\Crawling\LogViewModel.cs" />
+    <Compile Include="ViewModel\Crawling\TopicKeywordViewModel.cs" />
+    <Compile Include="ViewModel\Crawling\WebsiteCrawlerViewModel.cs" />
+    <Compile Include="ViewModel\TopicsTree\TopicTreeTabViewModel.cs" />
+    <Compile Include="ViewModel\WebsiteTree\WebsiteTreeBrowserViewModel.cs" />
+    <Compile Include="ViewModel\WebsiteTree\WebsiteTreeTabViewModel.cs" />
     <Compile Include="View\Crawling\CrawlingTabView.xaml.cs">
       <DependentUpon>CrawlingTabView.xaml</DependentUpon>
     </Compile>
@@ -145,7 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

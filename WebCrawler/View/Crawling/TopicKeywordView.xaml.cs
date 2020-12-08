@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WebCrawler.ViewModel.Crawling;
 
 namespace WebCrawler.View.Crawling
 {
@@ -20,9 +21,14 @@ namespace WebCrawler.View.Crawling
     /// </summary>
     public partial class TopicKeywordView : UserControl
     {
+        private readonly TopicKeywordViewModel _viewModel;
+
         public TopicKeywordView()
         {
             InitializeComponent();
+            _viewModel = new TopicKeywordViewModel();
+            // The DataContext serves as the starting point of Binding Paths
+            DataContext = _viewModel;
         }
     }
 }

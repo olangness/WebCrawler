@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WebCrawler.ViewModel.TopicsTree;
 
 namespace WebCrawler.View.TopicsTree
 {
@@ -20,9 +21,14 @@ namespace WebCrawler.View.TopicsTree
     /// </summary>
     public partial class TopicTreeTabView : UserControl
     {
+        private readonly TopicTreeTabViewModel _viewModel;
+
         public TopicTreeTabView()
         {
             InitializeComponent();
+            _viewModel = new TopicTreeTabViewModel();
+            // The DataContext serves as the starting point of Binding Paths
+            DataContext = _viewModel;
         }
     }
 }
