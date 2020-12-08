@@ -26,15 +26,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Configuration;
+using WebCrawler.Interfaces;
 
 namespace WebCrawler.Model
 {
     class Crawler
     {
-        private IRepository _externalUrlRepository;
-        private IRepository _otherUrlRepository;
-        private IRepository _failedUrlRepository;
-        private IRepository _currentPageUrlRepository;
+        private IRepos _externalUrlRepository;
+        private IRepos _otherUrlRepository;
+        private IRepos _failedUrlRepository;
+        private IRepos _currentPageUrlRepository;
         private static List<Page> _pages = new List<Page>();
         private static List<string> _exceptions = new List<string>();
         private bool isCurrentPage = true;
