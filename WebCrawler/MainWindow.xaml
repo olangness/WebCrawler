@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="dataGridView1" HorizontalAlignment="Left" Height="243" Margin="317,102,0,0" VerticalAlignment="Top" Width="423"/>
+        <DataGrid HorizontalAlignment="Left" Height="243" Margin="317,102,0,0" VerticalAlignment="Top" Width="423"/>
         <Label Content="Crawl Log" HorizontalAlignment="Left" Margin="317,76,0,0" VerticalAlignment="Top"/>
         <Label Content="Starting Website" HorizontalAlignment="Left" Margin="76,76,0,0" VerticalAlignment="Top"/>
         <Label Content="Topic Keywords" HorizontalAlignment="Left" Margin="76,188,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="76,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="76,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="button1" Content="Add" HorizontalAlignment="Left" Margin="201,213,0,0" VerticalAlignment="Top" Width="33"/>
-        <Button x:Name="button2" Content="Start Crawling" HorizontalAlignment="Left" Margin="76,315,0,0" VerticalAlignment="Top" Width="92" Height="30"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="76,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="76,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="201,213,0,0" VerticalAlignment="Top" Width="33"/>
+        <Button Content="Start Crawling" HorizontalAlignment="Left" Margin="76,315,0,0" VerticalAlignment="Top" Width="92" Height="30"/>
 
     </Grid>
 </Window>

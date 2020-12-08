@@ -11,25 +11,10 @@ namespace WebCrawler
         private string _url;
         private int _viewstateSize;
 
-        public int Size
-        {
-            get { return _size; }
-        }
+        public int Size { get; }
 
-        public string Text
-        {
-            get { return _text; }
-            set
-            {
-                _text = value;
-                _size = value.Length;
-            }
-        }
+        public string Text { get; set; }
 
-        public string Url
-        {
-            get { return _url; }
-            set { _url = value; }
-        }
+        public string Url { get; set; }
     }
 }
