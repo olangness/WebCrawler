@@ -38,9 +38,46 @@ namespace WebCrawler.Model
         private IRepos _currentPageUrlRepository;
         private static List<Page> _pages = new List<Page>();
         private static List<string> _exceptions = new List<string>();
-        //public List<String> Disallows = new List<String>();
-        private static List<string> topics = new List<string>();
         private bool isCurrentPage = true;
+        //public List<String> Disallows = new List<String>();
+
+        //Constructor
+        public Crawler(IRepos externalUrlRepository, IRepos otherUrlRepository, IRepos failedUrlRepository, IRepos currentPageUrlRepository)
+        {
+            _externalUrlRepository = externalUrlRepository;
+
+            _otherUrlRepository = otherUrlRepository;
+
+            _failedUrlRepository = failedUrlRepository;
+
+            _currentPageUrlRepository = currentPageUrlRepository;
+        }
+
+        //Initializing the crawling process.
+        public void InitializeCrawl()
+        {
+            CrawlPage(ConfigurationManager.AppSettings["url"]);
+        }
+
+        /*//Checks if robots.txt allows for page crawling
+        public bool RobotsAreObeyed(Uri url)
+        {
+            String host = url.GetLeftPart(UriPartial.Authority);
+            String pathAndQuery = url.PathAndQuery;
+            return Disallows.Contains(pathAndQuery);
+        }*/
+
+        //Initialisting the reporting
+        public void InitilizeCreateReport()
+        {
+            //var stringBuilder = Reporting.CreateReport(_externalUrlRepository, _otherUrlRepository, _failedUrlRepository, _currentPageUrlRepository, _pages, _exceptions);
+
+            //Logging.Logging.WriteReportToDisk(stringBuilder.ToString());
+
+            System.Diagnostics.Process.Start(ConfigurationManager.AppSettings["logTextFileName"].ToString());
+
+            Environment.Exit(0);
+        }
 
         private void CrawlPage(string url)
         {
@@ -98,32 +135,6 @@ namespace WebCrawler.Model
                     }
                 }
             }
-        }
-
-        //Initializing the crawling process.
-        public void InitializeCrawl()
-        {
-            CrawlPage(ConfigurationManager.AppSettings["url"]);
-        }
-
-        /*//Checks if robots.txt allows for page crawling
-        public bool RobotsAreObeyed(Uri url)
-        {
-            String host = url.GetLeftPart(UriPartial.Authority);
-            String pathAndQuery = url.PathAndQuery;
-            return Disallows.Contains(pathAndQuery);
-        }*/
-
-        //Initialisting the reporting
-        public void InitilizeCreateReport()
-        {
-            //var stringBuilder = Reporting.CreateReport(_externalUrlRepository, _otherUrlRepository, _failedUrlRepository, _currentPageUrlRepository, _pages, _exceptions);
-
-            //Logging.Logging.WriteReportToDisk(stringBuilder.ToString());
-
-            System.Diagnostics.Process.Start(ConfigurationManager.AppSettings["logTextFileName"].ToString());
-
-            Environment.Exit(0);
         }
 
         //Checks to see if the page has been crawled.
