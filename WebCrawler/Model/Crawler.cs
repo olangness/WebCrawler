@@ -100,16 +100,16 @@ namespace WebCrawler.Model
         //Initialisting the reporting
         public void InitilizeCreateReport()
         {
-            var stringBuilder = Reporting.CreateReport(_externalUrlRepository, _otherUrlRepository, _failedUrlRepository, _currentPageUrlRepository, _pages, _exceptions);
+            //var stringBuilder = Reporting.CreateReport(_externalUrlRepository, _otherUrlRepository, _failedUrlRepository, _currentPageUrlRepository, _pages, _exceptions);
 
-            Logging.Logging.WriteReportToDisk(stringBuilder.ToString());
+            //Logging.Logging.WriteReportToDisk(stringBuilder.ToString());
 
             System.Diagnostics.Process.Start(ConfigurationManager.AppSettings["logTextFileName"].ToString());
 
             Environment.Exit(0);
         }
 
-        // Checks to see if the page has been crawled.
+        //Checks to see if the page has been crawled.
         public static bool PageHasBeenCrawled(string url)
         {
             foreach (Page page in _pages)
@@ -211,7 +211,7 @@ namespace WebCrawler.Model
         private void button1_Click(object sender, EventArgs e)
         {
             //topics.Add(textBox2.Text);
-            QueryTerms.Add(textBox2.Text);
+            //QueryTerms.Add(textBox2.Text);
         }
     }
 }
