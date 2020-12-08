@@ -25,82 +25,90 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Configuration;
 
 namespace WebCrawler.Model
 {
     class Crawler
     {
-        private string Title { get; set; }
-        private string Url { get; set; }
-        //private string siteUrl = "";
-        //public string[] QueryTerms { get; } = { "", "" };
-        public List<String> QueryTerms { get; set; }
+        private IRepository _externalUrlRepository;
+        private IRepository _otherUrlRepository;
+        private IRepository _failedUrlRepository;
+        private IRepository _currentPageUrlRepository;
+        private static List<Page> _pages = new List<Page>();
+        private static List<string> _exceptions = new List<string>();
+        private bool isCurrentPage = true;
 
-        String URL;
-        private void button2_Click(object sender, EventArgs e)
+        private void CrawlPage(string url)
         {
-            ScrapeWebsite();
-        }
-        internal async void ScrapeWebsite()
-        {
-            if (!PageHasBeenCrawled(URL))
+            if (!PageHasBeenCrawled(url))
             {
-                URL = textBox1.Text;
-                CancellationTokenSource cancellationToken = new CancellationTokenSource();
-                HttpClient httpClient = new HttpClient();
-                HttpResponseMessage request = await httpClient.GetAsync(URL);
-                cancellationToken.Token.ThrowIfCancellationRequested();
+                var htmlText = GetWebText(url);
 
-                Stream response = await request.Content.ReadAsStreamAsync();
-                cancellationToken.Token.ThrowIfCancellationRequested();
+                var linkParser = new LinkParser();
 
-                HtmlParser parser = new HtmlParser();
-                IHtmlDocument document = parser.ParseDocument(response);
+                var page = new Page();
+                page.Text = htmlText;
+                page.Url = url;
 
-                GetScrapeResults(document);
-            }
-        }
-        private void GetScrapeResults(IHtmlDocument document)
-        {
-            IEnumerable<IElement> articleLink;
+                _pages.Add(page);
 
-            foreach (var term in QueryTerms)
-            {
-                articleLink = document.All.Where(x => x.ClassName == "views-field views-field-nothing" &&
-                (x.ParentElement.InnerHtml.Contains(term) || x.ParentElement.InnerHtml.Contains(term.ToLower())));
-                if (articleLink.Any())
+                linkParser.ParseLinks(page, url);
+
+                //Add data to main data lists
+                if (isCurrentPage)
                 {
-                    PrintResults(articleLink);
+                    AddRangeButNoDuplicates(_currentPageUrlRepository.List, linkParser.ExternalUrls);
+                }
+
+                AddRangeButNoDuplicates(_externalUrlRepository.List, linkParser.ExternalUrls);
+                AddRangeButNoDuplicates(_otherUrlRepository.List, linkParser.OtherUrls);
+                AddRangeButNoDuplicates(_failedUrlRepository.List, linkParser.BadUrls);
+
+                foreach (string exception in linkParser.Exceptions)
+                    _exceptions.Add(exception);
+
+                isCurrentPage = false;
+                //Crawl all the links found on the page.
+                foreach (string link in _externalUrlRepository.List)
+                {
+                    string formattedLink = link;
+                    try
+                    {
+                        formattedLink = FixPath(url, formattedLink);
+
+                        if (formattedLink != String.Empty)
+                        {
+                            CrawlPage(formattedLink);
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+                        _failedUrlRepository.List.Add(formattedLink + " (on page at url " + url + ") - " + exc.Message);
+                    }
                 }
             }
         }
 
-        public void PrintResults(IEnumerable<IElement> articleLink)
+        //Initializing the crawling process.
+        public void InitializeCrawl()
         {
-            foreach (var element in articleLink)
-            {
-                CleanUpResults(element);
-                dataGridView1.DataContext = $"{Title} - {Url}{Environment.NewLine}";
-            }
+            CrawlPage(ConfigurationManager.AppSettings["url"]);
         }
 
-        private void CleanUpResults(IElement result)
+        //Initialisting the reporting
+        public void InitilizeCreateReport()
         {
-            string htmlResult = result.InnerHtml.ReplaceFirst("        <span class=\"field-content\"><div><a href=\"", "https://www.oceannetworks.ca");
-            htmlResult = htmlResult.ReplaceFirst("\">", "*");
-            htmlResult = htmlResult.ReplaceFirst("</a></div>\n<div class=\"article-title-top\">", "-");
-            htmlResult = htmlResult.ReplaceFirst("</div>\n<hr></span>  ", "");
+            var stringBuilder = Reporting.CreateReport(_externalUrlRepository, _otherUrlRepository, _failedUrlRepository, _currentPageUrlRepository, _pages, _exceptions);
 
-            SplitResults(htmlResult);
+            Logging.Logging.WriteReportToDisk(stringBuilder.ToString());
+
+            System.Diagnostics.Process.Start(ConfigurationManager.AppSettings["logTextFileName"].ToString());
+
+            Environment.Exit(0);
         }
 
-        private void SplitResults(string htmlResult)
-        {
-            string[] splitResults = htmlResult.Split('*');
-            Url = splitResults[0];
-            Title = splitResults[1];
-        }
-
+        // Checks to see if the page has been crawled.
         public static bool PageHasBeenCrawled(string url)
         {
             foreach (Page page in _pages)
@@ -111,6 +119,94 @@ namespace WebCrawler.Model
 
             return false;
         }
+
+        // Fixes a path. Makes sure it is a fully functional absolute url
+        public static string FixPath(string originatingUrl, string link)
+        {
+            string formattedLink = String.Empty;
+
+            if (link.IndexOf("../") > -1)
+            {
+                formattedLink = ResolveRelativePaths(link, originatingUrl);
+            }
+            else if (originatingUrl.IndexOf(ConfigurationManager.AppSettings["url"].ToString()) > -1
+                && link.IndexOf(ConfigurationManager.AppSettings["url"].ToString()) == -1 && !link.Contains("http:"))
+            {
+                formattedLink = originatingUrl.Substring(0, originatingUrl.LastIndexOf("/") + 1) + link;
+            }
+            else if (link.IndexOf(ConfigurationManager.AppSettings["url"].ToString()) == -1)
+            {
+                formattedLink = link; //ConfigurationManager.AppSettings["url"].ToString() + 
+            }
+
+            return formattedLink;
+        }
+
+        //turn a relative path into an absolute path
+        public static string ResolveRelativePaths(string relativeUrl, string originatingUrl)
+        {
+            string resolvedUrl = String.Empty;
+
+            string[] relativeUrlArray = relativeUrl.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] originatingUrlElements = originatingUrl.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            int indexOfFirstNonRelativePathElement = 0;
+            for (int i = 0; i <= relativeUrlArray.Length - 1; i++)
+            {
+                if (relativeUrlArray[i] != "..")
+                {
+                    indexOfFirstNonRelativePathElement = i;
+                    break;
+                }
+            }
+
+            int countOfOriginatingUrlElementsToUse = originatingUrlElements.Length - indexOfFirstNonRelativePathElement - 1;
+            for (int i = 0; i <= countOfOriginatingUrlElementsToUse - 1; i++)
+            {
+                if (originatingUrlElements[i] == "http:" || originatingUrlElements[i] == "https:")
+                    resolvedUrl += originatingUrlElements[i] + "//";
+                else
+                    resolvedUrl += originatingUrlElements[i] + "/";
+            }
+
+            for (int i = 0; i <= relativeUrlArray.Length - 1; i++)
+            {
+                if (i >= indexOfFirstNonRelativePathElement)
+                {
+                    resolvedUrl += relativeUrlArray[i];
+
+                    if (i < relativeUrlArray.Length - 1)
+                        resolvedUrl += "/";
+                }
+            }
+
+            return resolvedUrl;
+        }
+
+        // Merges a two lists of strings.
+        private static void AddRangeButNoDuplicates(List<string> targetList, List<string> sourceList)
+        {
+            foreach (string str in sourceList)
+            {
+                if (!targetList.Contains(str))
+                    targetList.Add(str);
+            }
+        }
+
+        // Gets the response text for a given url.
+        public static string GetWebText(string url)
+        {
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+            request.UserAgent = "A Web Crawler";
+
+            WebResponse response = request.GetResponse();
+
+            Stream stream = response.GetResponseStream();
+
+            StreamReader reader = new StreamReader(stream);
+            string htmlText = reader.ReadToEnd();
+            return htmlText;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             //topics.Add(textBox2.Text);

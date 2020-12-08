@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Text.RegularExpressions;
+using WebCrawler.Model;
 
 namespace WebCrawler
 {
