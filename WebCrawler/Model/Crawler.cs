@@ -1,7 +1,7 @@
-﻿using AngleSharp.Dom;
+﻿/*using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
-using AngleSharp.Text;
+using AngleSharp.Text;*/
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,6 +38,8 @@ namespace WebCrawler.Model
         private IRepos _currentPageUrlRepository;
         private static List<Page> _pages = new List<Page>();
         private static List<string> _exceptions = new List<string>();
+        //public List<String> Disallows = new List<String>();
+        private static List<string> topics = new List<string>();
         private bool isCurrentPage = true;
 
         private void CrawlPage(string url)
@@ -70,6 +72,13 @@ namespace WebCrawler.Model
                     _exceptions.Add(exception);
 
                 isCurrentPage = false;
+
+                /*//For each extracted URL
+                //• Obey robots.txt (freshness caveat)
+                //c. Check that not already in frontier
+                var paths = page.OutLinks.Where(x => page.RobotsAreObeyed(x)
+                                        && b.Contains(x) == false);*/
+
                 //Crawl all the links found on the page.
                 foreach (string link in _externalUrlRepository.List)
                 {
@@ -96,6 +105,14 @@ namespace WebCrawler.Model
         {
             CrawlPage(ConfigurationManager.AppSettings["url"]);
         }
+
+        /*//Checks if robots.txt allows for page crawling
+        public bool RobotsAreObeyed(Uri url)
+        {
+            String host = url.GetLeftPart(UriPartial.Authority);
+            String pathAndQuery = url.PathAndQuery;
+            return Disallows.Contains(pathAndQuery);
+        }*/
 
         //Initialisting the reporting
         public void InitilizeCreateReport()
@@ -215,3 +232,5 @@ namespace WebCrawler.Model
         }
     }
 }
+
+
