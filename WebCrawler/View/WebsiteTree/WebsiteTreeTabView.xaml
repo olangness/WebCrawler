@@ -7,6 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="19*"></RowDefinition>
+            <RowDefinition Height="19*"></RowDefinition>
+            <RowDefinition Height="206*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label>Website</Label>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="20" Margin="5,5,0,0" Grid.Row="1"/>
+        <local:WebsiteTreeBrowserView Grid.Row="2"></local:WebsiteTreeBrowserView>
     </Grid>
 </UserControl>
