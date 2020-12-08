@@ -43,19 +43,22 @@ namespace WebCrawler.Model
         }
         internal async void ScrapeWebsite()
         {
-            URL = textBox1.Text;
-            CancellationTokenSource cancellationToken = new CancellationTokenSource();
-            HttpClient httpClient = new HttpClient();
-            HttpResponseMessage request = await httpClient.GetAsync(URL);
-            cancellationToken.Token.ThrowIfCancellationRequested();
+            if (!PageHasBeenCrawled(URL))
+            {
+                URL = textBox1.Text;
+                CancellationTokenSource cancellationToken = new CancellationTokenSource();
+                HttpClient httpClient = new HttpClient();
+                HttpResponseMessage request = await httpClient.GetAsync(URL);
+                cancellationToken.Token.ThrowIfCancellationRequested();
 
-            Stream response = await request.Content.ReadAsStreamAsync();
-            cancellationToken.Token.ThrowIfCancellationRequested();
+                Stream response = await request.Content.ReadAsStreamAsync();
+                cancellationToken.Token.ThrowIfCancellationRequested();
 
-            HtmlParser parser = new HtmlParser();
-            IHtmlDocument document = parser.ParseDocument(response);
+                HtmlParser parser = new HtmlParser();
+                IHtmlDocument document = parser.ParseDocument(response);
 
-            GetScrapeResults(document);
+                GetScrapeResults(document);
+            }
         }
         private void GetScrapeResults(IHtmlDocument document)
         {
@@ -98,6 +101,16 @@ namespace WebCrawler.Model
             Title = splitResults[1];
         }
 
+        public static bool PageHasBeenCrawled(string url)
+        {
+            foreach (Page page in _pages)
+            {
+                if (page.Url == url)
+                    return true;
+            }
+
+            return false;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             //topics.Add(textBox2.Text);
