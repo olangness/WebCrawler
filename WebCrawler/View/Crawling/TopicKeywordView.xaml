@@ -4,16 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WebCrawler.View.Crawling"
-             mc:Ignorable="d" Height="85" Width="134">
+             mc:Ignorable="d" Height="60" Width="200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
         <Label Content="Topics" Grid.Row="0" />
-        <TextBox Margin="5" Grid.Row="1"/>
-        <Label Content="(x) Topic" Grid.Row="2" />
+        <TextBox Margin="5" Grid.Row="1" Width="200" HorizontalAlignment="Left"/>
 
     </Grid>
 </UserControl>

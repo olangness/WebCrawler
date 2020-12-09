@@ -4,17 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WebCrawler.View.Crawling"
-             mc:Ignorable="d" Height="234.483" Width="138.793">
-    <Grid Margin="0,0,0,-53" >
+             mc:Ignorable="d" Height="161.483" Width="188.793">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="34*"/>
-            <RowDefinition Height="19*"/>
-            <RowDefinition Height="74*"/>
-            <RowDefinition Height="143*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Label Content="Starting URL" Grid.Row="0"/>
-        <TextBox Name="URLTextBox" Grid.Row="1" />
-        <local:TopicKeywordView Grid.Row="2" />
-        <Button Name="StartButton" Grid.Row="3" Width="80" HorizontalAlignment="Left" Margin="0,0,0,113">Start</Button>
+        <TextBox Name="URLTextBox" Grid.Row="1" Margin="5" Text="{Binding StartingURL, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Content="Topics" Grid.Row="2" />
+        <TextBox Margin="5" Grid.Row="3" Width="200" HorizontalAlignment="Left" Text="{Binding Topics, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Name="StartButton" Grid.Row="4" Width="80" HorizontalAlignment="Left">Start</Button>
     </Grid>
 </UserControl>
