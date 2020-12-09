@@ -49,6 +49,17 @@
     </Reference>
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -61,6 +72,9 @@
       <HintPath>..\packages\System.Text.Encoding.CodePages.4.5.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -91,6 +105,38 @@
     <Compile Include="Repos\ExternalUrlRepo.cs" />
     <Compile Include="Repos\FailedUrlRepo.cs" />
     <Compile Include="Repos\OtherUrlRepo.cs" />
+    <Compile Include="ViewModel\Crawling\CrawlingTabViewModel.cs" />
+    <Compile Include="ViewModel\Crawling\LogViewModel.cs" />
+    <Compile Include="ViewModel\Crawling\TopicKeywordViewModel.cs" />
+    <Compile Include="ViewModel\Crawling\TopicPillViewModel.cs" />
+    <Compile Include="View\Crawling\TopicPillView.xaml.cs">
+      <DependentUpon>TopicPillView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\Crawling\WebsiteCrawlerViewModel.cs" />
+    <Compile Include="ViewModel\TopicsTree\TopicTreeTabViewModel.cs" />
+    <Compile Include="ViewModel\WebsiteTree\WebsiteTreeBrowserViewModel.cs" />
+    <Compile Include="ViewModel\WebsiteTree\WebsiteTreeTabViewModel.cs" />
+    <Compile Include="View\Crawling\CrawlingTabView.xaml.cs">
+      <DependentUpon>CrawlingTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Crawling\LogView.xaml.cs">
+      <DependentUpon>LogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Crawling\TopicKeywordView.xaml.cs">
+      <DependentUpon>TopicKeywordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Crawling\WebsiteCrawlerView.xaml.cs">
+      <DependentUpon>WebsiteCrawlerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TopicsTree\TopicTreeTabView.xaml.cs">
+      <DependentUpon>TopicTreeTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WebsiteTree\WebsiteTreeBrowserView.xaml.cs">
+      <DependentUpon>WebsiteTreeBrowserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WebsiteTree\WebsiteTreeTabView.xaml.cs">
+      <DependentUpon>WebsiteTreeTabView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -103,6 +149,38 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Crawling\TopicPillView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Crawling\CrawlingTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Crawling\LogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Crawling\TopicKeywordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Crawling\WebsiteCrawlerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TopicsTree\TopicTreeTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WebsiteTree\WebsiteTreeBrowserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WebsiteTree\WebsiteTreeTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Crawler.cs" />
@@ -136,6 +214,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="log.txt" />
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
