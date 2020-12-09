@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using WebCrawler.Repositories;
+using WebCrawler.Model;
 
 namespace WebCrawler
 {
@@ -6,7 +8,11 @@ namespace WebCrawler
     {
         public MainWindow()
         {
-            InitializeComponent();
+            Crawler crawl = new Crawler(new ExternalUrlRepository(), new OtherUrlRepository(), new FailedUrlRepository(), new CurrentPageUrlRepository());
+            crawl.InitializeCrawl();
+            //InitializeComponent();
         }
     }
 }
+
+

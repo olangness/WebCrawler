@@ -53,31 +53,39 @@ namespace WebCrawler
                 }
 
 
-                if (!GoodUrls.Contains(foundHref))
+                try
                 {
-                    if (foundHref != "/")
+                    if (!GoodUrls.Contains(foundHref))
                     {
-                        if (IsExternalUrl(foundHref))
+                        if (foundHref != "/")
                         {
-                            _externalUrls.Add(foundHref);
-                        }
-                        else if (!IsAWebPage(foundHref))
-                        {
-                            foundHref = Crawler.FixPath(sourceUrl, foundHref);
-                            _otherUrls.Add(foundHref);
-                        }
-                        else
-                        {
-                            GoodUrls.Add(foundHref);
+                            if (IsExternalUrl(foundHref))
+                            {
+                                _externalUrls.Add(foundHref);
+                            }
+                            else if (!IsAWebPage(foundHref))
+                            {
+                                foundHref = Crawler.FixPath(sourceUrl, foundHref);
+                                _otherUrls.Add(foundHref);
+                            }
+                            else
+                            {
+                                GoodUrls.Add(foundHref);
+                            }
                         }
                     }
                 }
+                catch (NullReferenceException nre)
+                {
+                    Console.WriteLine(nre + " no good url");
+                    Console.WriteLine(GoodUrls.ToString());
+                }
+
             }
         }
 
 
         //Is the url to an external site?
-        //<returns>Boolean indicating whether or not the url is to an external destination.</returns>
         private static bool IsExternalUrl(string url)
         {
             if (url.Length > 8 && (url.Substring(0, 7) == "http://" || url.Substring(0, 3) == "www" || url.Substring(0, 7) == "https://"))
@@ -107,3 +115,5 @@ namespace WebCrawler
         }
     }
 }
+
+

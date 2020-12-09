@@ -40,6 +40,7 @@ namespace WebCrawler.Model
         private static List<string> _exceptions = new List<string>();
         private bool isCurrentPage = true;
         //public List<String> Disallows = new List<String>();
+        private static List<string> urlsWithTopics = new List<string>();
 
         //Constructor
         public Crawler(IRepos externalUrlRepository, IRepos otherUrlRepository, IRepos failedUrlRepository, IRepos currentPageUrlRepository)
@@ -57,6 +58,7 @@ namespace WebCrawler.Model
         public void InitializeCrawl()
         {
             CrawlPage(ConfigurationManager.AppSettings["url"]);
+            //CrawlPage("https://www.imdb.com/list/ls063897780/");
         }
 
         /*//Checks if robots.txt allows for page crawling
@@ -92,6 +94,8 @@ namespace WebCrawler.Model
                 page.Url = url;
 
                 _pages.Add(page);
+
+                //AddUrlToList(topic);
 
                 linkParser.ParseLinks(page, url);
 
@@ -148,6 +152,19 @@ namespace WebCrawler.Model
 
             return false;
         }
+
+        // Adds url containing keyword(s) to a list
+        private static void AddUrlToList(string topic)
+        {
+            foreach (Page page in _pages)
+            {
+                if (page.ToString().Contains(topic))
+                {
+                    urlsWithTopics.Add(page.Url);
+                }
+            }
+        }
+
 
         // Fixes a path. Makes sure it is a fully functional absolute url
         public static string FixPath(string originatingUrl, string link)
