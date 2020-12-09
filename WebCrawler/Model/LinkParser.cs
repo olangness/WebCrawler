@@ -25,10 +25,26 @@ namespace WebCrawler
             get { return _goodUrls; }
             set { _goodUrls = value; }
         }
-        public List<string> BadUrls { get; set; }
-        public List<string> OtherUrls { get; set; }
-        public List<string> ExternalUrls { get; set; }
-        public List<string> Exceptions { get; set; }
+        public List<string> BadUrls
+        {
+            get { return _badUrls; }
+            set { _badUrls = value; }
+        }
+        public List<string> OtherUrls
+        {
+            get { return _otherUrls; }
+            set { _otherUrls = value; }
+        }
+        public List<string> ExternalUrls
+        {
+            get { return _externalUrls; }
+            set { _externalUrls = value; }
+        }
+        public List<string> Exceptions
+        {
+            get { return _exceptions; }
+            set { _exceptions = value; }
+        }
 
         //Parses a page looking for links.
         public void ParseLinks(Page page, string sourceUrl)
