@@ -13,21 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WebCrawler
+namespace WebCrawler.ViewModel.Crawling
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TopicPill.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TopicPillView : UserControl
     {
-        public MainWindow()
+        private readonly TopicPillViewModel _viewModel;
+
+        public TopicPillView()
         {
             InitializeComponent();
-        }
-
-        private void CrawlingTabView_Loaded(object sender, RoutedEventArgs e)
-        {
-
+            _viewModel = new TopicPillViewModel();
+            // The DataContext serves as the starting point of Binding Paths
+            DataContext = _viewModel;
         }
     }
 }

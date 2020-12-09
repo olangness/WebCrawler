@@ -12,22 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WebCrawler.ViewModel.Crawling;
 
-namespace WebCrawler
+namespace WebCrawler.View.Crawling
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LogView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LogView : UserControl
     {
-        public MainWindow()
+        private readonly LogViewModel _viewModel;
+
+        public LogView()
         {
             InitializeComponent();
-        }
-
-        private void CrawlingTabView_Loaded(object sender, RoutedEventArgs e)
-        {
-
+            _viewModel = new LogViewModel();
+            // The DataContext serves as the starting point of Binding Paths
+            DataContext = _viewModel;
         }
     }
 }
