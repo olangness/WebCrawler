@@ -20,7 +20,11 @@ namespace WebCrawler
         private List<string> _externalUrls = new List<string>();
         private List<string> _exceptions = new List<string>();
 
-        public List<string> GoodUrls { get; set; }
+        public List<string> GoodUrls
+        {
+            get { return _goodUrls; }
+            set { _goodUrls = value; }
+        }
         public List<string> BadUrls { get; set; }
         public List<string> OtherUrls { get; set; }
         public List<string> ExternalUrls { get; set; }
@@ -77,7 +81,6 @@ namespace WebCrawler
                 }
                 catch (NullReferenceException nre)
                 {
-                    Console.WriteLine(nre + " no good url");
                     Console.WriteLine(GoodUrls.ToString());
                 }
 

@@ -1,32 +1,18 @@
-﻿/*using AngleSharp.Dom;
-using AngleSharp.Html.Dom;
-using AngleSharp.Html.Parser;
-using AngleSharp.Text;*/
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Configuration;
 using WebCrawler.Interfaces;
+using System.Text.RegularExpressions;
+using WebCrawler.Repositories;
+using WebCrawler.Logging;
+using InfinityCrawler.Processing.Content;
+using TurnerSoftware.RobotsExclusionTools;
 
 namespace WebCrawler.Model
 {
@@ -58,7 +44,6 @@ namespace WebCrawler.Model
         public void InitializeCrawl()
         {
             CrawlPage(ConfigurationManager.AppSettings["url"]);
-            //CrawlPage("https://www.imdb.com/list/ls063897780/");
         }
 
         /*//Checks if robots.txt allows for page crawling
@@ -66,15 +51,18 @@ namespace WebCrawler.Model
         {
             String host = url.GetLeftPart(UriPartial.Authority);
             String pathAndQuery = url.PathAndQuery;
-            return Disallows.Contains(pathAndQuery);
+            if ()
+                return true;
+            else
+                return false;
         }*/
 
         //Initialisting the reporting
         public void InitilizeCreateReport()
         {
-            //var stringBuilder = Reporting.CreateReport(_externalUrlRepository, _otherUrlRepository, _failedUrlRepository, _currentPageUrlRepository, _pages, _exceptions);
+            var stringBuilder = Reporting.CreateReport(_externalUrlRepository, _otherUrlRepository, _failedUrlRepository, _currentPageUrlRepository, _pages, _exceptions);
 
-            //Logging.Logging.WriteReportToDisk(stringBuilder.ToString());
+            Logging.Logging.WriteReportToDisk(stringBuilder.ToString());
 
             System.Diagnostics.Process.Start(ConfigurationManager.AppSettings["logTextFileName"].ToString());
 
