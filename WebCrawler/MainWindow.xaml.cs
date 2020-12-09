@@ -12,6 +12,11 @@ namespace WebCrawler
             crawl.InitializeCrawl();
             //InitializeComponent();
         }
+
+        private void CrawlingTabView_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 
