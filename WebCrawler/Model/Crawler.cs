@@ -46,17 +46,6 @@ namespace WebCrawler.Model
             CrawlPage(ConfigurationManager.AppSettings["url"]);
         }
 
-        /*//Checks if robots.txt allows for page crawling
-        public bool RobotsAreObeyed(Uri url)
-        {
-            String host = url.GetLeftPart(UriPartial.Authority);
-            String pathAndQuery = url.PathAndQuery;
-            if ()
-                return true;
-            else
-                return false;
-        }*/
-
         //Initialisting the reporting
         public void InitilizeCreateReport()
         {
