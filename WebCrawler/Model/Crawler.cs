@@ -79,11 +79,11 @@ namespace WebCrawler.Model
         {
             //var crawlUrl = ConfigurationManager.AppSettings["url"];
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            configuration.AppSettings.Settings[key].Value = url;
+            configuration.AppSettings.Settings["url"].Value = url;
             configuration.Save();
 
             ConfigurationManager.RefreshSection("appSettings");
-            //CrawlPage(ConfigurationManager.AppSettings["url"]);
+            CrawlPage(ConfigurationManager.AppSettings["url"]);
         }
 
         /*//Initialisting the reporting
