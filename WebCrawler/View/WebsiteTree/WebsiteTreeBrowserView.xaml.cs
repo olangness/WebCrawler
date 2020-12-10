@@ -29,6 +29,7 @@ namespace WebCrawler.View.WebsiteTree
             _viewModel = new WebsiteTreeBrowserViewModel();
             // The DataContext serves as the starting point of Binding Paths
             DataContext = _viewModel;
+            TreeBranches.ItemsSource = _viewModel.TreeBranchViewModels;
         }
     }
 }

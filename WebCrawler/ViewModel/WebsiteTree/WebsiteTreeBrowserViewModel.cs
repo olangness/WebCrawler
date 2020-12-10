@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using WebCrawler.View.WebsiteTree;
 
 namespace WebCrawler.ViewModel.WebsiteTree
 {
@@ -28,6 +30,27 @@ namespace WebCrawler.ViewModel.WebsiteTree
                     OnPropertyChange("SelectedWebsite");
                 }
             }
+        }
+
+        public List<WebsiteTreeBranchView> TreeBranchViewModels { get; set; }
+
+        public WebsiteTreeBrowserViewModel()
+        {
+            List<WebsiteTreeBranchView> treeBranches = new List<WebsiteTreeBranchView>();
+
+            WebsiteTreeBranchView branch = new WebsiteTreeBranchView("Title of page", "Da url of page", 0);
+
+            treeBranches.Add(branch);
+
+            WebsiteTreeBranchView branch1 = new WebsiteTreeBranchView("Title of page", "Da url of page", 1);
+
+            treeBranches.Add(branch1);
+
+            WebsiteTreeBranchView branch2 = new WebsiteTreeBranchView("Title of page", "Da url of page", 2);
+
+            treeBranches.Add(branch2);
+
+            TreeBranchViewModels = treeBranches;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
