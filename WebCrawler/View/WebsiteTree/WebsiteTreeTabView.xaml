@@ -7,6 +7,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <local:WebsiteTreeBrowserView Grid.Row="2"></local:WebsiteTreeBrowserView>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="23*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Width="60" Grid.Row="0" HorizontalAlignment="Left" Command="{Binding Path=Refresh, Mode=OneWay}">Refresh</Button>
+        <TreeView Name="trvMenu" Grid.Row="1">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Items}">
+                    <TextBlock Text="{Binding Title}" />
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
     </Grid>
 </UserControl>

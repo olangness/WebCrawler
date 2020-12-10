@@ -114,8 +114,6 @@
     <Compile Include="ViewModel\Crawling\TopicKeywordViewModel.cs" />
     <Compile Include="ViewModel\Crawling\WebsiteCrawlerViewModel.cs" />
     <Compile Include="ViewModel\TopicsTree\TopicTreeTabViewModel.cs" />
-    <Compile Include="ViewModel\WebsiteTree\WebsiteTreeBranchViewModel.cs" />
-    <Compile Include="ViewModel\WebsiteTree\WebsiteTreeBrowserViewModel.cs" />
     <Compile Include="ViewModel\WebsiteTree\WebsiteTreeTabViewModel.cs" />
     <Compile Include="View\Crawling\CrawlingTabView.xaml.cs">
       <DependentUpon>CrawlingTabView.xaml</DependentUpon>
@@ -131,12 +129,6 @@
     </Compile>
     <Compile Include="View\TopicsTree\TopicTreeTabView.xaml.cs">
       <DependentUpon>TopicTreeTabView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\WebsiteTree\WebsiteTreeBranchView.xaml.cs">
-      <DependentUpon>WebsiteTreeBranchView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\WebsiteTree\WebsiteTreeBrowserView.xaml.cs">
-      <DependentUpon>WebsiteTreeBrowserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WebsiteTree\WebsiteTreeTabView.xaml.cs">
       <DependentUpon>WebsiteTreeTabView.xaml</DependentUpon>
@@ -170,14 +162,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TopicsTree\TopicTreeTabView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\WebsiteTree\WebsiteTreeBranchView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\WebsiteTree\WebsiteTreeBrowserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
