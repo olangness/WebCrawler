@@ -10,7 +10,6 @@ using System.Configuration;
 using WebCrawler.Interfaces;
 using System.Text.RegularExpressions;
 using WebCrawler.Repositories;
-using WebCrawler.Logging;
 using InfinityCrawler.Processing.Content;
 using TurnerSoftware.RobotsExclusionTools;
 
@@ -49,13 +48,13 @@ namespace WebCrawler.Model
         //Initialisting the reporting
         public void InitilizeCreateReport()
         {
-            var stringBuilder = Reporting.CreateReport(_externalUrlRepository, _otherUrlRepository, _failedUrlRepository, _currentPageUrlRepository, _pages, _exceptions);
+            //var stringBuilder = Reporting.CreateReport(_externalUrlRepository, _otherUrlRepository, _failedUrlRepository, _currentPageUrlRepository, _pages, _exceptions);
 
-            Logging.Logging.WriteReportToDisk(stringBuilder.ToString());
+            //Logging.Logging.WriteReportToDisk(stringBuilder.ToString());
 
-            System.Diagnostics.Process.Start(ConfigurationManager.AppSettings["logTextFileName"].ToString());
+            //System.Diagnostics.Process.Start(ConfigurationManager.AppSettings["logTextFileName"].ToString());
 
-            Environment.Exit(0);
+            //Environment.Exit(0);
         }
 
         private void CrawlPage(string url)
