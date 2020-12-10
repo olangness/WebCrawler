@@ -75,9 +75,15 @@ namespace WebCrawler.Model
         }
 
         //Initializing the crawling process.
-        public void InitializeCrawl(string url)
+        public void InitializeCrawl(string key, string url)
         {
-            CrawlPage(url);
+            //var crawlUrl = ConfigurationManager.AppSettings["url"];
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            configuration.AppSettings.Settings[key].Value = url;
+            configuration.Save();
+
+            ConfigurationManager.RefreshSection("appSettings");
+            //CrawlPage(ConfigurationManager.AppSettings["url"]);
         }
 
         /*//Initialisting the reporting
@@ -107,9 +113,6 @@ namespace WebCrawler.Model
                 _pages.Add(page);
                 //links.Add(url);
                 log.Add(new Log($"New Entry: {url}", DateTime.Now));
-
-
-                //AddUrlToList(topic);
 
                 linkParser.ParseLinks(page, url);
 
