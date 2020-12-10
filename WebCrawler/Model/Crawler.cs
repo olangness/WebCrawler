@@ -53,7 +53,7 @@ namespace WebCrawler.Model
         //Initializing the crawling process.
         public void InitializeCrawl(string url)
         {
-            CrawlPage(url);
+            CrawlPage("https://www.ndsu.edu/");
         }
 
         //Initialisting the reporting
