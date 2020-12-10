@@ -25,7 +25,6 @@ namespace WebCrawler.Model
         private static List<Page> _pages = new List<Page>();
         private static List<string> _exceptions = new List<string>();
         private bool isCurrentPage = true;
-        //public List<String> Disallows = new List<String>();
         private static List<string> urlsWithTopics = new List<string>();
 
         //Constructor
@@ -53,6 +52,12 @@ namespace WebCrawler.Model
 
             Logging.Logging.WriteReportToDisk(stringBuilder.ToString());
 
+            System.Diagnostics.Process.Start(ConfigurationManager.AppSettings["logTextFileName"].ToString());
+
+            //var stringBuilder = Reporting.CreateReport(_externalUrlRepository, _otherUrlRepository, _failedUrlRepository, _currentPageUrlRepository, _pages, _exceptions);
+            var stringBuilder = "";
+            //Logging.Logging.WriteReportToDisk(stringBuilder.ToString());
+            
             System.Diagnostics.Process.Start(ConfigurationManager.AppSettings["logTextFileName"].ToString());
 
             Environment.Exit(0);
@@ -90,12 +95,6 @@ namespace WebCrawler.Model
                     _exceptions.Add(exception);
 
                 isCurrentPage = false;
-
-                /*//For each extracted URL
-                //• Obey robots.txt (freshness caveat)
-                //c. Check that not already in frontier
-                var paths = page.OutLinks.Where(x => page.RobotsAreObeyed(x)
-                                        && b.Contains(x) == false);*/
 
                 //Crawl all the links found on the page.
                 foreach (string link in _externalUrlRepository.List)
@@ -148,7 +147,6 @@ namespace WebCrawler.Model
                 }
             }
         }
-
 
         // Fixes a path. Makes sure it is a fully functional absolute url
         public static string FixPath(string originatingUrl, string link)
