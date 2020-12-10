@@ -80,7 +80,7 @@ namespace WebCrawler.Model
             CrawlPage(url);
         }
 
-        //Initialisting the reporting
+        /*//Initialisting the reporting
         public void InitilizeCreateReport()
         {
             //var stringBuilder = Reporting.CreateReport(_externalUrlRepository, _otherUrlRepository, _failedUrlRepository, _currentPageUrlRepository, _pages, _exceptions);
@@ -90,7 +90,7 @@ namespace WebCrawler.Model
             //System.Diagnostics.Process.Start(ConfigurationManager.AppSettings["logTextFileName"].ToString());
 
             //Environment.Exit(0);
-        }
+        }*/
 
         private void CrawlPage(string url)
         {
