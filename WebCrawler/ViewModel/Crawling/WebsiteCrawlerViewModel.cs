@@ -6,12 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WebCrawler.Model;
+using WebCrawler.Repositories;
 
 namespace WebCrawler.ViewModel.Crawling
 {
     class WebsiteCrawlerViewModel : INotifyPropertyChanged
     {
-        
+        private Crawler _model = new Crawler(new ExternalUrlRepository(), new OtherUrlRepository(), new FailedUrlRepository(), new CurrentPageUrlRepository());
+
         private string _startingUrl;
         public string StartingURL
         {
@@ -46,7 +49,7 @@ namespace WebCrawler.ViewModel.Crawling
 
         public WebsiteCrawlerViewModel()
         {
-            //StartCommand = new RelayCommand<object>();
+            StartCommand = new RelayCommand<object>(_ => _model.InitializeCrawl(StartingURL));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -8,9 +8,8 @@ namespace WebCrawler
     {
         public MainWindow()
         {
-            Crawler crawl = new Crawler(new ExternalUrlRepository(), new OtherUrlRepository(), new FailedUrlRepository(), new CurrentPageUrlRepository());
-            crawl.InitializeCrawl();
-            //InitializeComponent();
+            
+            InitializeComponent();
         }
 
         private void CrawlingTabView_Loaded(object sender, RoutedEventArgs e)

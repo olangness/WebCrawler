@@ -40,9 +40,9 @@ namespace WebCrawler.Model
         }
 
         //Initializing the crawling process.
-        public void InitializeCrawl()
+        public void InitializeCrawl(string url)
         {
-            CrawlPage(ConfigurationManager.AppSettings["url"]);
+            CrawlPage(url);
         }
 
         //Initialisting the reporting
