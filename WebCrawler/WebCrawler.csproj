@@ -107,10 +107,6 @@
     <Compile Include="ViewModel\Crawling\CrawlingTabViewModel.cs" />
     <Compile Include="ViewModel\Crawling\LogViewModel.cs" />
     <Compile Include="ViewModel\Crawling\TopicKeywordViewModel.cs" />
-    <Compile Include="ViewModel\Crawling\TopicPillViewModel.cs" />
-    <Compile Include="View\Crawling\TopicPillView.xaml.cs">
-      <DependentUpon>TopicPillView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\Crawling\WebsiteCrawlerViewModel.cs" />
     <Compile Include="ViewModel\TopicsTree\TopicTreeTabViewModel.cs" />
     <Compile Include="ViewModel\WebsiteTree\WebsiteTreeBrowserViewModel.cs" />
@@ -148,10 +144,6 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\Crawling\TopicPillView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Crawling\CrawlingTabView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

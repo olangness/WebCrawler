@@ -45,11 +45,11 @@ namespace WebCrawler.ViewModel.Crawling
 
         public TopicKeywordViewModel TopicKeywordViewModel { get; set; }
 
-        public ICommand StartCommand { get; private set; }
+        public ICommand StartButton { get; private set; }
 
         public WebsiteCrawlerViewModel()
         {
-            StartCommand = new RelayCommand<object>(_ => _model.InitializeCrawl(StartingURL));
+            StartButton = new RelayCommand<object>(_ => _model.InitializeCrawl(StartingURL));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
