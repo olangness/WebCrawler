@@ -13,7 +13,7 @@ namespace WebCrawler.ViewModel.Crawling
 {
     class WebsiteCrawlerViewModel : INotifyPropertyChanged
     {
-        private Crawler _model = new Crawler(new ExternalUrlRepository(), new OtherUrlRepository(), new FailedUrlRepository(), new CurrentPageUrlRepository());
+        public Crawler Model { get; set; }
 
         private string _startingUrl;
         public string StartingURL
@@ -47,9 +47,10 @@ namespace WebCrawler.ViewModel.Crawling
 
         public ICommand StartButton { get; private set; }
 
-        public WebsiteCrawlerViewModel()
+        public WebsiteCrawlerViewModel(Crawler model)
         {
-            StartButton = new RelayCommand<object>(_ => _model.InitializeCrawl(StartingURL));
+            StartButton = new RelayCommand<object>(_ => Model.InitializeCrawl(StartingURL));
+            Model = model;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

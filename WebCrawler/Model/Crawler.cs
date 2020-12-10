@@ -13,7 +13,7 @@ using WebCrawler.Repositories;
 
 namespace WebCrawler.Model
 {
-    class Crawler
+    public class Crawler
     {
         private IRepos _externalUrlRepository;
         private IRepos _otherUrlRepository;
@@ -24,7 +24,19 @@ namespace WebCrawler.Model
         private bool isCurrentPage = true;
         private static List<string> urlsWithTopics = new List<string>();
         private static List<Link> links = new List<Link>();
-        private static List<Log> log = new List<Log>();
+        private static List<string> log = new List<string>();
+
+        public List<string> Log
+        {
+            get { return log; }
+            set { log = value; }
+        }
+
+        public List<Link> Links
+        {
+            get { return links; }
+            set { links = value; }
+        }
 
         //Constructor
         public Crawler(IRepos externalUrlRepository, IRepos otherUrlRepository, IRepos failedUrlRepository, IRepos currentPageUrlRepository)
@@ -69,7 +81,7 @@ namespace WebCrawler.Model
                 page.Url = url;
 
                 _pages.Add(page);
-                links.Add(url);
+                //links.Add(url);
                 log.Add("New Log Entry: "+url);
 
 

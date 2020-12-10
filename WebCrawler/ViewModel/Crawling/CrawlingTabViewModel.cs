@@ -4,15 +4,24 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebCrawler.Model;
+using WebCrawler.Repositories;
+using WebCrawler.View.Crawling;
 
 namespace WebCrawler.ViewModel.Crawling
 {
     class CrawlingTabViewModel : INotifyPropertyChanged
     {
-        public WebsiteCrawlerViewModel WebsiteCrawlerViewModel { get; set; } 
+        public WebsiteCrawlerView WebsiteCrawlerView { get; set; }
 
-        public LogViewModel LogViewModel { get; set; }
+        public LogView LogView { get; set; }
 
+        public CrawlingTabViewModel()
+        {
+            Crawler model = new Crawler(new ExternalUrlRepository(), new OtherUrlRepository(), new FailedUrlRepository(), new CurrentPageUrlRepository());
+            WebsiteCrawlerView = new WebsiteCrawlerView(model);
+            LogView = new LogView(model);
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

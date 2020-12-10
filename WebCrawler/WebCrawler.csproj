@@ -100,6 +100,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Data Storage\Data.cs" />
+    <Compile Include="Model\Data Storage\Link.cs" />
+    <Compile Include="Model\Data Storage\Log.cs" />
+    <Compile Include="Model\Data Storage\Topic.cs" />
     <Compile Include="Repos\CurrentPageUrlRepo.cs" />
     <Compile Include="Repos\ExternalUrlRepo.cs" />
     <Compile Include="Repos\FailedUrlRepo.cs" />
@@ -115,6 +119,7 @@
     <Compile Include="View\Crawling\CrawlingTabView.xaml.cs">
       <DependentUpon>CrawlingTabView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Crawling\ListToTextConverter.cs" />
     <Compile Include="View\Crawling\LogView.xaml.cs">
       <DependentUpon>LogView.xaml</DependentUpon>
     </Compile>

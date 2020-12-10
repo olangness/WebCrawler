@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebCrawler.Model
 {
-    class Link
+    public class Link
     {
         string name;
         string url;

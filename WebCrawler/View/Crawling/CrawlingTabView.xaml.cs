@@ -25,8 +25,9 @@ namespace WebCrawler.View.Crawling
 
         public CrawlingTabView()
         {
-            InitializeComponent();
             _viewModel = new CrawlingTabViewModel();
+            InitializeComponent();
+            
             // The DataContext serves as the starting point of Binding Paths
             DataContext = _viewModel;
         }

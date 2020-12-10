@@ -18,20 +18,6 @@ namespace WebCrawler.ViewModel.WebsiteTree
             set { _treeText = value; }
         }
 
-        private string _selectedWebsite;
-        public string SelectedWebsite
-        {
-            get { return _selectedWebsite; }
-            set
-            {
-                if (_selectedWebsite != value)
-                {
-                    _selectedWebsite = value;
-                    OnPropertyChange("SelectedWebsite");
-                }
-            }
-        }
-
         public List<WebsiteTreeBranchView> TreeBranchViewModels { get; set; }
 
         public WebsiteTreeBrowserViewModel()

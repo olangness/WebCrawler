@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebCrawler.Model
 {
-    class Log
+    public class Log
     {
         string messageText;
         DateTime messageTime;
