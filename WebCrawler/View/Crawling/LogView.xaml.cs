@@ -24,12 +24,12 @@ namespace WebCrawler.View.Crawling
     {
         private readonly LogViewModel _viewModel;
 
-        public LogView(Crawler model)
+        public LogView()
         {
-            InitializeComponent();
-            _viewModel = new LogViewModel(model);
-            // The DataContext serves as the starting point of Binding Paths
-            DataContext = _viewModel;
+            //InitializeComponent();
+            //_viewModel = new LogViewModel();
+            //// The DataContext serves as the starting point of Binding Paths
+            //DataContext = _viewModel;
         }
     }
 }

@@ -12,6 +12,15 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <local:WebsiteCrawlerView Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <local:LogView Grid.Column="1"/>
+        <ListView Grid.Column="1" Name="ListViewProjects" Grid.RowSpan="3" SelectionChanged="ListViewLogsSelectionChanged" ItemsSource="{Binding Logs}" IsSynchronizedWithCurrentItem="True" MinWidth="100">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="{Binding Path=MessageTime, StringFormat='yyyy-MM-dd HH:mm:ss' }"/>
+                        <TextBlock Text="{Binding Path=MessageText}"/>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>

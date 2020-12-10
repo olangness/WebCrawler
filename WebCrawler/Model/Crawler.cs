@@ -10,6 +10,8 @@ using System.Configuration;
 using WebCrawler.Interfaces;
 using System.Text.RegularExpressions;
 using WebCrawler.Repositories;
+using System.Collections.ObjectModel;
+using WebCrawler.Model.Data_Storage;
 
 namespace WebCrawler.Model
 {
@@ -24,9 +26,31 @@ namespace WebCrawler.Model
         private bool isCurrentPage = true;
         private static List<string> urlsWithTopics = new List<string>();
         private static List<Link> links = new List<Link>();
-        private static List<string> log = new List<string>();
+        private static ObservableCollection<Log> log = new ObservableCollection<Log>();
 
-        public List<string> Log
+        private static Crawler instance = null;
+        private static readonly object padlock = new object();
+
+        Crawler()
+        {
+        }
+
+        public static Crawler Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new Crawler(new ExternalUrlRepository(), new OtherUrlRepository(), new FailedUrlRepository(), new CurrentPageUrlRepository());
+                    }
+                    return instance;
+                }
+            }
+        }
+
+        public ObservableCollection<Log> Log
         {
             get { return log; }
             set { log = value; }
@@ -82,7 +106,7 @@ namespace WebCrawler.Model
 
                 _pages.Add(page);
                 //links.Add(url);
-                log.Add("New Log Entry: "+url);
+                log.Add(new Log($"New Entry: {url}", DateTime.Now));
 
 
                 //AddUrlToList(topic);

@@ -24,10 +24,10 @@ namespace WebCrawler.View.Crawling
     {
         private readonly WebsiteCrawlerViewModel _viewModel;
 
-        public WebsiteCrawlerView(Crawler model)
+        public WebsiteCrawlerView()
         {
             InitializeComponent();
-            _viewModel = new WebsiteCrawlerViewModel(model);
+            _viewModel = new WebsiteCrawlerViewModel();
             // The DataContext serves as the starting point of Binding Paths
             DataContext = _viewModel;
         }

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using WebCrawler.Model;
+using WebCrawler.Model.Data_Storage;
 using WebCrawler.Repositories;
 using WebCrawler.View.Crawling;
 
@@ -12,15 +15,13 @@ namespace WebCrawler.ViewModel.Crawling
 {
     class CrawlingTabViewModel : INotifyPropertyChanged
     {
-        public WebsiteCrawlerView WebsiteCrawlerView { get; set; }
+        public WebsiteCrawlerViewModel WebsiteCrawlerViewModel { get; set; }
 
-        public LogView LogView { get; set; }
+        public ObservableCollection<Log> Logs { get; set; } = new ObservableCollection<Log>();
 
         public CrawlingTabViewModel()
         {
-            Crawler model = new Crawler(new ExternalUrlRepository(), new OtherUrlRepository(), new FailedUrlRepository(), new CurrentPageUrlRepository());
-            WebsiteCrawlerView = new WebsiteCrawlerView(model);
-            LogView = new LogView(model);
+            Logs = Crawler.Instance.Log;
         }
 
 
@@ -33,5 +34,7 @@ namespace WebCrawler.ViewModel.Crawling
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        
     }
 }

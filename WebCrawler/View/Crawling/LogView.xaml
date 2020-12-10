@@ -6,12 +6,7 @@
              xmlns:local="clr-namespace:WebCrawler.View.Crawling"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-            <local:ListToTextConverter x:Key="converter1" />
-        </UserControl.Resources>
     <Grid>
-        <TextBox Name="tb_files"  
-                 Text="{Binding Path=LogModel, Converter={StaticResource converter1} }"
-                 />
+        
     </Grid>
 </UserControl>
