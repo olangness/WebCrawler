@@ -119,12 +119,18 @@ namespace WebCrawler.Model
                 //Add data to main data lists
                 if (isCurrentPage)
                 {
-                    AddRangeButNoDuplicates(_currentPageUrlRepository.List, linkParser.ExternalUrls);
+                    AddRangeButNoDuplicates(_currentPageUrlRepository.List, linkParser.GoodUrls);
                 }
 
                 AddRangeButNoDuplicates(_externalUrlRepository.List, linkParser.ExternalUrls);
                 AddRangeButNoDuplicates(_otherUrlRepository.List, linkParser.OtherUrls);
                 AddRangeButNoDuplicates(_failedUrlRepository.List, linkParser.BadUrls);
+
+                foreach(var urlToParse in linkParser.GoodUrls)
+                {
+                    links.Add(new Link("Page Title", urlToParse));
+                    log.Add(new Log($"New Entry: {url}", DateTime.Now));
+                }
 
                 foreach (string exception in linkParser.Exceptions)
                     _exceptions.Add(exception);
