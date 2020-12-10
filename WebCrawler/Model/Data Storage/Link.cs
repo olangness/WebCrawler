@@ -1,58 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WebCrawler.Model
 {
-    public class Link
+    public class Link : INotifyPropertyChanged
     {
-        string name;
-        string url;
-        int linkID;
-        int parentID;
 
         public Link()
         {
 
         }
-        public Link(string name, string url, int linkID, int parentID)
+        public Link(string name, string url)
         {
-            Name = name;
-            URL = url;
-            LinkID = linkID;
-            ParentID = parentID; //if parentID == 0, then this is root URL
+            LinkName = name;
+            LinkURL = url;
         }
 
-        public string Name
+        private string _linkName;
+        public string LinkName
         {
-            get { return name; }
-
-            set { name = value; }
+            get { return _linkName; }
+            set
+            {
+                _linkName = value;
+                NotifyPropertyChanged("LinkName");
+            }
         }
 
-        public string URL
+        private string _linkUrl;
+        public string LinkURL
         {
-            get { return url; }
-
-            set { url = value; }
+            get { return _linkUrl; }
+            set
+            {
+                _linkUrl = value;
+                NotifyPropertyChanged("LinkURL");
+            }
         }
 
-        public int LinkID
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(String info)
         {
-            get { return linkID; }
-            set { linkID = value; }
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
         }
-
-        public int ParentID
-        {
-            get { return parentID; }
-            set { parentID = value; }
-        }
-
-
-
-
     }
 }

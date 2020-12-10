@@ -30,6 +30,10 @@ namespace WebCrawler.View.WebsiteTree
             // The DataContext serves as the starting point of Binding Paths
             DataContext = _viewModel;
         }
+
+        public void ListViewLinkSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
     }
 }
 

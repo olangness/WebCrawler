@@ -1,30 +1,37 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WebCrawler.Model;
 using WebCrawler.View.WebsiteTree;
 using static System.Windows.Forms.LinkLabel;
 
 namespace WebCrawler.ViewModel.WebsiteTree
 {
-    class WebsiteTreeTabViewModel
+    class WebsiteTreeTabViewModel : INotifyPropertyChanged
     {
-        public string WebsiteURL { get; set; }
 
-
-        public ICommand Refresh { get; private set; }
+        public ObservableCollection<Model.Link> Links { get; set; } = new ObservableCollection<Model.Link>();
 
         public WebsiteTreeTabViewModel()
         {
-            Refresh = new RelayCommand<object>(_ => RefreshTree());
+            Links = Crawler.Instance.Links;
         }
 
-        public void RefreshTree()
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChange(string propertyName)
         {
-            Link parent = new Link();
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
+
     }
 }

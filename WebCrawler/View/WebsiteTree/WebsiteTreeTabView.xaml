@@ -6,19 +6,13 @@
              xmlns:local="clr-namespace:WebCrawler.View.WebsiteTree"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="23*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Button Width="60" Grid.Row="0" HorizontalAlignment="Left" Command="{Binding Path=Refresh, Mode=OneWay}">Refresh</Button>
-        <TreeView Name="trvMenu" Grid.Row="1">
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Items}">
-                    <TextBlock Text="{Binding Title}" />
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
-    </Grid>
+    <ListView Grid.Column="1" Name="ListViewProjects" Grid.RowSpan="3" SelectionChanged="ListViewLinkSelectionChanged" ItemsSource="{Binding Links}" IsSynchronizedWithCurrentItem="True" MinWidth="100">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <WrapPanel>
+                    <TextBlock Text="{Binding Path=LinkURL}"/>
+                </WrapPanel>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </UserControl>

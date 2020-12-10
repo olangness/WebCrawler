@@ -25,7 +25,7 @@ namespace WebCrawler.Model
         private static List<string> _exceptions = new List<string>();
         private bool isCurrentPage = true;
         private static List<string> urlsWithTopics = new List<string>();
-        private static List<Link> links = new List<Link>();
+        private static ObservableCollection<Link> links = new ObservableCollection<Link>();
         private static ObservableCollection<Log> log = new ObservableCollection<Log>();
 
         private static Crawler instance = null;
@@ -56,7 +56,7 @@ namespace WebCrawler.Model
             set { log = value; }
         }
 
-        public List<Link> Links
+        public ObservableCollection<Link> Links
         {
             get { return links; }
             set { links = value; }
@@ -105,7 +105,7 @@ namespace WebCrawler.Model
                 page.Url = url;
 
                 _pages.Add(page);
-                //links.Add(url);
+                links.Add(new Link("Page Title", url));
                 log.Add(new Log($"New Entry: {url}", DateTime.Now));
 
 
