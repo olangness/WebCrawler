@@ -10,8 +10,6 @@ using System.Configuration;
 using WebCrawler.Interfaces;
 using System.Text.RegularExpressions;
 using WebCrawler.Repositories;
-using InfinityCrawler.Processing.Content;
-using TurnerSoftware.RobotsExclusionTools;
 
 namespace WebCrawler.Model
 {
@@ -24,8 +22,9 @@ namespace WebCrawler.Model
         private static List<Page> _pages = new List<Page>();
         private static List<string> _exceptions = new List<string>();
         private bool isCurrentPage = true;
-        //public List<String> Disallows = new List<String>();
         private static List<string> urlsWithTopics = new List<string>();
+        private int linkID;
+        private int parentID;
 
         //Constructor
         public Crawler(IRepos externalUrlRepository, IRepos otherUrlRepository, IRepos failedUrlRepository, IRepos currentPageUrlRepository)
@@ -48,6 +47,9 @@ namespace WebCrawler.Model
         //Initialisting the reporting
         public void InitilizeCreateReport()
         {
+            Data data = new Data();
+            data.AddLink(name, url, linkID, parentID);
+
             //var stringBuilder = Reporting.CreateReport(_externalUrlRepository, _otherUrlRepository, _failedUrlRepository, _currentPageUrlRepository, _pages, _exceptions);
 
             //Logging.Logging.WriteReportToDisk(stringBuilder.ToString());
@@ -90,12 +92,6 @@ namespace WebCrawler.Model
 
                 isCurrentPage = false;
 
-                /*//For each extracted URL
-                //• Obey robots.txt (freshness caveat)
-                //c. Check that not already in frontier
-                var paths = page.OutLinks.Where(x => page.RobotsAreObeyed(x)
-                                        && b.Contains(x) == false);*/
-
                 //Crawl all the links found on the page.
                 foreach (string link in _externalUrlRepository.List)
                 {
@@ -128,19 +124,6 @@ namespace WebCrawler.Model
 
             return false;
         }
-
-        // Adds url containing keyword(s) to a list
-        private static void AddUrlToList(string topic)
-        {
-            foreach (Page page in _pages)
-            {
-                if (page.ToString().Contains(topic))
-                {
-                    urlsWithTopics.Add(page.Url);
-                }
-            }
-        }
-
 
         // Fixes a path. Makes sure it is a fully functional absolute url
         public static string FixPath(string originatingUrl, string link)
