@@ -117,10 +117,8 @@ namespace WebCrawler.Model
 
         public void AddLink(string name, string url, int linkID, int parentID) // add a link to the list
         {
-            myLink.Name = name;
-            myLink.URL = url;
-            myLink.LinkID = linkID;
-            myLink.ParentID = parentID;
+            myLink.LinkName = name;
+            myLink.LinkURL = url;
 
             for (int i = 0; i < links.Length; i++)
             {
@@ -152,10 +150,10 @@ namespace WebCrawler.Model
 
         public Link GetSpecificLink(string name, string url, int linkID, int parentID)
         {
-            Link temp = new Link("no Link found", "", 0, 0);
+            Link temp = new Link("no Link found", "");
             for (int i = 0; i < links.Length; i++)
             {
-                if (links[i].Name.Equals(name) && links[i].URL.Equals(url) && links[i].LinkID == linkID && links[i].ParentID == parentID)
+                if (links[i].LinkName.Equals(name) && links[i].LinkURL.Equals(url))
                 {
                     temp = links[i];
                 }

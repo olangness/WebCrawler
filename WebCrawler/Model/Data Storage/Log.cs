@@ -8,7 +8,7 @@ using WebCrawler.Model.Data_Storage;
 
 namespace WebCrawler.Model
 {
-    public class Log : ILog
+    public class Log : INotifyPropertyChanged
     {
         string messageText;
         DateTime messageTime;
