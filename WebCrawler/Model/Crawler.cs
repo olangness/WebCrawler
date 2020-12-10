@@ -10,10 +10,12 @@ using System.Configuration;
 using WebCrawler.Interfaces;
 using System.Text.RegularExpressions;
 using WebCrawler.Repositories;
+using System.Collections.ObjectModel;
+using WebCrawler.Model.Data_Storage;
 
 namespace WebCrawler.Model
 {
-    class Crawler
+    public class Crawler
     {
         private IRepos _externalUrlRepository;
         private IRepos _otherUrlRepository;
@@ -24,7 +26,41 @@ namespace WebCrawler.Model
         private bool isCurrentPage = true;
         private static List<string> urlsWithTopics = new List<string>();
         private static List<Link> links = new List<Link>();
-        private static List<Log> log = new List<Log>();
+        private static ObservableCollection<Log> log = new ObservableCollection<Log>();
+
+        private static Crawler instance = null;
+        private static readonly object padlock = new object();
+
+        Crawler()
+        {
+        }
+
+        public static Crawler Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new Crawler(new ExternalUrlRepository(), new OtherUrlRepository(), new FailedUrlRepository(), new CurrentPageUrlRepository());
+                    }
+                    return instance;
+                }
+            }
+        }
+
+        public ObservableCollection<Log> Log
+        {
+            get { return log; }
+            set { log = value; }
+        }
+
+        public List<Link> Links
+        {
+            get { return links; }
+            set { links = value; }
+        }
 
         //Constructor
         public Crawler(IRepos externalUrlRepository, IRepos otherUrlRepository, IRepos failedUrlRepository, IRepos currentPageUrlRepository)
@@ -39,12 +75,18 @@ namespace WebCrawler.Model
         }
 
         //Initializing the crawling process.
-        public void InitializeCrawl()
+        public void InitializeCrawl(string key, string url)
         {
-            CrawlPage(ConfigurationManager.AppSettings["url"]);
+            //var crawlUrl = ConfigurationManager.AppSettings["url"];
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            configuration.AppSettings.Settings[key].Value = url;
+            configuration.Save();
+
+            ConfigurationManager.RefreshSection("appSettings");
+            //CrawlPage(ConfigurationManager.AppSettings["url"]);
         }
 
-        //Initialisting the reporting
+        /*//Initialisting the reporting
         public void InitilizeCreateReport()
         {
             //var stringBuilder = Reporting.CreateReport(_externalUrlRepository, _otherUrlRepository, _failedUrlRepository, _currentPageUrlRepository, _pages, _exceptions);
@@ -54,7 +96,7 @@ namespace WebCrawler.Model
             //System.Diagnostics.Process.Start(ConfigurationManager.AppSettings["logTextFileName"].ToString());
 
             //Environment.Exit(0);
-        }
+        }*/
 
         private void CrawlPage(string url)
         {
@@ -69,11 +111,8 @@ namespace WebCrawler.Model
                 page.Url = url;
 
                 _pages.Add(page);
-                links.Add(url);
-                log.Add("New Log Entry: "+url);
-
-
-                //AddUrlToList(topic);
+                //links.Add(url);
+                log.Add(new Log($"New Entry: {url}", DateTime.Now));
 
                 linkParser.ParseLinks(page, url);
 

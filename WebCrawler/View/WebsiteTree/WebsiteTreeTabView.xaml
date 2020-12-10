@@ -7,13 +7,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="19*"></RowDefinition>
-            <RowDefinition Height="19*"></RowDefinition>
-            <RowDefinition Height="206*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="23*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label>Website</Label>
-        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="20" Margin="5,5,0,0" Grid.Row="1"/>
-        <local:WebsiteTreeBrowserView Grid.Row="2"></local:WebsiteTreeBrowserView>
+        <Button Width="60" Grid.Row="0" HorizontalAlignment="Left" Command="{Binding Path=Refresh, Mode=OneWay}">Refresh</Button>
+        <TreeView Name="trvMenu" Grid.Row="1">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Items}">
+                    <TextBlock Text="{Binding Title}" />
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
     </Grid>
 </UserControl>

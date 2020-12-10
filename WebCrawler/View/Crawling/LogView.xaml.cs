@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WebCrawler.Model;
 using WebCrawler.ViewModel.Crawling;
 
 namespace WebCrawler.View.Crawling
@@ -25,10 +26,10 @@ namespace WebCrawler.View.Crawling
 
         public LogView()
         {
-            InitializeComponent();
-            _viewModel = new LogViewModel();
-            // The DataContext serves as the starting point of Binding Paths
-            DataContext = _viewModel;
+            //InitializeComponent();
+            //_viewModel = new LogViewModel();
+            //// The DataContext serves as the starting point of Binding Paths
+            //DataContext = _viewModel;
         }
     }
 }

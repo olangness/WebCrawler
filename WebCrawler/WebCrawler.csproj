@@ -100,6 +100,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Data Storage\Data.cs" />
+    <Compile Include="Model\Data Storage\ILog.cs" />
+    <Compile Include="Model\Data Storage\Link.cs" />
+    <Compile Include="Model\Data Storage\Log.cs" />
+    <Compile Include="Model\Data Storage\Topic.cs" />
     <Compile Include="Repos\CurrentPageUrlRepo.cs" />
     <Compile Include="Repos\ExternalUrlRepo.cs" />
     <Compile Include="Repos\FailedUrlRepo.cs" />
@@ -107,13 +112,8 @@
     <Compile Include="ViewModel\Crawling\CrawlingTabViewModel.cs" />
     <Compile Include="ViewModel\Crawling\LogViewModel.cs" />
     <Compile Include="ViewModel\Crawling\TopicKeywordViewModel.cs" />
-    <Compile Include="ViewModel\Crawling\TopicPillViewModel.cs" />
-    <Compile Include="View\Crawling\TopicPillView.xaml.cs">
-      <DependentUpon>TopicPillView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\Crawling\WebsiteCrawlerViewModel.cs" />
     <Compile Include="ViewModel\TopicsTree\TopicTreeTabViewModel.cs" />
-    <Compile Include="ViewModel\WebsiteTree\WebsiteTreeBrowserViewModel.cs" />
     <Compile Include="ViewModel\WebsiteTree\WebsiteTreeTabViewModel.cs" />
     <Compile Include="View\Crawling\CrawlingTabView.xaml.cs">
       <DependentUpon>CrawlingTabView.xaml</DependentUpon>
@@ -130,9 +130,6 @@
     <Compile Include="View\TopicsTree\TopicTreeTabView.xaml.cs">
       <DependentUpon>TopicTreeTabView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\WebsiteTree\WebsiteTreeBrowserView.xaml.cs">
-      <DependentUpon>WebsiteTreeBrowserView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\WebsiteTree\WebsiteTreeTabView.xaml.cs">
       <DependentUpon>WebsiteTreeTabView.xaml</DependentUpon>
     </Compile>
@@ -148,10 +145,6 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\Crawling\TopicPillView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Crawling\CrawlingTabView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,10 +162,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TopicsTree\TopicTreeTabView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\WebsiteTree\WebsiteTreeBrowserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -13,8 +13,5 @@
         <TabItem Header="Website Tree" >
             <uc1:WebsiteTreeTabView></uc1:WebsiteTreeTabView>
         </TabItem>
-        <TabItem Header="Topics" >
-            <topicstree:TopicTreeTabView></topicstree:TopicTreeTabView>
-        </TabItem>
     </TabControl>
 </Window>

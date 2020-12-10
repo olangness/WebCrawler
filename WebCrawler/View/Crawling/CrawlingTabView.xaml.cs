@@ -30,5 +30,9 @@ namespace WebCrawler.View.Crawling
             // The DataContext serves as the starting point of Binding Paths
             DataContext = _viewModel;
         }
+
+        public void ListViewLogsSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
     }
 }
