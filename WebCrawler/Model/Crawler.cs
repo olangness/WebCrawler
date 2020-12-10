@@ -23,8 +23,8 @@ namespace WebCrawler.Model
         private static List<string> _exceptions = new List<string>();
         private bool isCurrentPage = true;
         private static List<string> urlsWithTopics = new List<string>();
-        private int linkID;
-        private int parentID;
+        private static List<Link> links = new List<Link>();
+        private static List<Log> log = new List<Log>();
 
         //Constructor
         public Crawler(IRepos externalUrlRepository, IRepos otherUrlRepository, IRepos failedUrlRepository, IRepos currentPageUrlRepository)
@@ -47,9 +47,6 @@ namespace WebCrawler.Model
         //Initialisting the reporting
         public void InitilizeCreateReport()
         {
-            Data data = new Data();
-            data.AddLink(name, url, linkID, parentID);
-
             //var stringBuilder = Reporting.CreateReport(_externalUrlRepository, _otherUrlRepository, _failedUrlRepository, _currentPageUrlRepository, _pages, _exceptions);
 
             //Logging.Logging.WriteReportToDisk(stringBuilder.ToString());
@@ -72,6 +69,9 @@ namespace WebCrawler.Model
                 page.Url = url;
 
                 _pages.Add(page);
+                links.Add(url);
+                log.Add("New Log Entry: "+url);
+
 
                 //AddUrlToList(topic);
 
