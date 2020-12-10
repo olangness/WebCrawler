@@ -84,9 +84,6 @@ namespace WebCrawler.Model
                 //links.Add(url);
                 log.Add("New Log Entry: "+url);
 
-
-                //AddUrlToList(topic);
-
                 linkParser.ParseLinks(page, url);
 
                 //Add data to main data lists
