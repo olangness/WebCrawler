@@ -144,16 +144,18 @@ namespace WebCrawler.Model
                 Console.WriteLine(linkParser.GoodUrls);
                 Console.WriteLine(_externalUrlRepository.List);
                 //Crawl all the links found on the page.
+                int loopBreak1 = 0;
                 foreach (string link in _externalUrlRepository.List)
                 {
                     string formattedLink = link;
+                    loopBreak1++;
                     try
                     {
                         formattedLink = FixPath(url, formattedLink);
 
                         if (formattedLink != String.Empty)
                         {
-                            links.Add(new Link(" ", "==============Crawling to new external page...=============="));
+                            links.Add(new Link(" ", "==============Crawling to new external page " + link + "...=============="));
                             CrawlPage(formattedLink);
                         }
                     }
@@ -161,30 +163,38 @@ namespace WebCrawler.Model
                     {
                         _failedUrlRepository.List.Add(formattedLink + " (on page at url " + url + ") - " + exc.Message);
                     }
-                }
-                int loopBreak = 0;
-                foreach (string link in linkParser.GoodUrls)
-                {
-                    string formattedLink = link;
-                    loopBreak++;
-                    try
-                    {
-                        formattedLink = FixPath(url, formattedLink);
-                        
-                        if (formattedLink != String.Empty)
-                        {
-                            links.Add(new Link(" ", "==============Crawling to new internal page...=============="));
-                            CrawlPage(formattedLink);
-                        }
-                    }
-                    catch (Exception exc)
-                    {
-                        _failedUrlRepository.List.Add(formattedLink + " (on page at url " + url + ") - " + exc.Message);
-                    }
-                    if (loopBreak >= 100)
+                    if (loopBreak1 >= 100)
                     {
                         break;
                     }
+                }
+                int loopBreak = 0;
+                foreach (string iLink in linkParser.GoodUrls)
+                {
+                    string formattediLink = iLink;
+                    loopBreak++;
+                    try
+                    {
+                        formattediLink = FixPath(url, formattediLink);
+
+                        if (formattediLink != String.Empty)
+                        {
+                            links.Add(new Link(" ", "==============Crawling to new internal page from " + iLink + "...=============="));
+                            CrawlPage(formattediLink);
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+                        _failedUrlRepository.List.Add(formattediLink + " (on page at url " + url + ") - " + exc.Message);
+                    }
+                    if (loopBreak >= 5)
+                    {
+                        break;
+                    }
+                    /*if (formattediLink == "/covid19")
+                    {
+                        break;
+                    }*/
                 }
             }
         }
