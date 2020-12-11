@@ -79,9 +79,9 @@ namespace WebCrawler.Model
         {
             //var crawlUrl = ConfigurationManager.AppSettings["url"];
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            
             configuration.AppSettings.Settings["url"].Value = url;
             configuration.Save();
-
             ConfigurationManager.RefreshSection("appSettings");
             CrawlPage(ConfigurationManager.AppSettings["url"]);
         }
@@ -130,13 +130,19 @@ namespace WebCrawler.Model
                 {
                     links.Add(new Link("Page Title", urlToParse));
                     log.Add(new Log($"New Entry: {url}", DateTime.Now));
+                    
+                }
+                if (linkParser.GoodUrls.Count == 0)
+                {
+                    links.Add(new Link("Page Title", "==============No New URLs From Page=============="));
                 }
 
                 foreach (string exception in linkParser.Exceptions)
                     _exceptions.Add(exception);
 
                 isCurrentPage = false;
-
+                Console.WriteLine(linkParser.GoodUrls);
+                Console.WriteLine(_externalUrlRepository.List);
                 //Crawl all the links found on the page.
                 foreach (string link in _externalUrlRepository.List)
                 {
@@ -147,12 +153,37 @@ namespace WebCrawler.Model
 
                         if (formattedLink != String.Empty)
                         {
+                            links.Add(new Link(" ", "==============Crawling to new external page...=============="));
                             CrawlPage(formattedLink);
                         }
                     }
                     catch (Exception exc)
                     {
                         _failedUrlRepository.List.Add(formattedLink + " (on page at url " + url + ") - " + exc.Message);
+                    }
+                }
+                int loopBreak = 0;
+                foreach (string link in linkParser.GoodUrls)
+                {
+                    string formattedLink = link;
+                    loopBreak++;
+                    try
+                    {
+                        formattedLink = FixPath(url, formattedLink);
+                        
+                        if (formattedLink != String.Empty)
+                        {
+                            links.Add(new Link(" ", "==============Crawling to new internal page...=============="));
+                            CrawlPage(formattedLink);
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+                        _failedUrlRepository.List.Add(formattedLink + " (on page at url " + url + ") - " + exc.Message);
+                    }
+                    if (loopBreak >= 100)
+                    {
+                        break;
                     }
                 }
             }
