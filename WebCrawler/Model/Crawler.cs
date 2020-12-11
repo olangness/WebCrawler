@@ -97,11 +97,17 @@ namespace WebCrawler.Model
 
             //Environment.Exit(0);
         }*/
-
+        int depthLimit = 0;
         private void CrawlPage(string url)
         {
+            
             if (!PageHasBeenCrawled(url))
             {
+                if(depthLimit++ >= 5)
+                {
+                    return;
+                }
+
                 var htmlText = GetWebText(url);
 
                 var linkParser = new LinkParser();
@@ -179,7 +185,8 @@ namespace WebCrawler.Model
 
                         if (formattediLink != String.Empty)
                         {
-                            links.Add(new Link(" ", "==============Crawling to new internal page from " + iLink + "...=============="));
+
+                            links.Add(new Link(" ", "==============Crawling to new internal page " + iLink + "...=============="));
                             CrawlPage(formattediLink);
                         }
                     }
