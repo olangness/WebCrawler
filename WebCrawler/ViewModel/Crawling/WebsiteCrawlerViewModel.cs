@@ -49,7 +49,7 @@ namespace WebCrawler.ViewModel.Crawling
 
         public WebsiteCrawlerViewModel()
         {
-            StartButton = new RelayCommand<object>(_ => Model.InitializeCrawl(StartingURL));
+            StartButton = new RelayCommand<object>(_ => Model.InitializeCrawl("url", StartingURL));
             Model = Crawler.Instance;
         }
 
