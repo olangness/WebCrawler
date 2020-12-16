@@ -1,6 +1,10 @@
 # WebCrawler
 Olson Langness, Drew Wickoren, Sam Penney, Damien Danelson
 
+## Source Code
+
+Source code can be found in the [GitHub](https://github.com/olangness/WebCrawler) and downloaded in [Releases](https://github.com/olangness/WebCrawler/releases)
+
 ## Install Instructions
 
 - Go to [WebCrawler Releases Page](https://github.com/olangness/WebCrawler/releases)
